@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio d'Ibrahima Insa Diop, étudiant en DevOps, informatique et réseaux.">
+  <title>Ibrahima Insa Diop — Portfolio DevOps</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a2e;
+      --panel-2: #17223a;
+      --text: #eef3ff;
+      --muted: #aab7d1;
+      --accent: #55e6c1;
+      --accent-2: #7aa8ff;
+      --line: rgba(176, 198, 238, .16);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10; backdrop-filter: blur(16px);
+      background: rgba(11, 16, 32, .84); border-bottom: 1px solid var(--line);
+    }
+    nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.05rem; }
+    .brand span { color: var(--accent); }
+    .navlinks { display: flex; flex-wrap: wrap; gap: 22px; color: var(--muted); font-size: .92rem; }
+    .navlinks a:hover { color: var(--accent); }
+    .hero { padding: 100px 0 86px; position: relative; overflow: hidden; }
+    .hero::after {
+      content: ""; position: absolute; width: 440px; height: 440px; border-radius: 50%;
+      right: -140px; top: 20px; background: radial-gradient(circle, rgba(85,230,193,.16), transparent 68%);
+      pointer-events: none;
+    }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .17em; font-size: .76rem; font-weight: 800; }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.7rem); line-height: .99; letter-spacing: -.065em; margin: 18px 0 24px; max-width: 850px; }
+    h1 span { color: var(--accent); }
+    .hero p { color: var(--muted); max-width: 650px; font-size: 1.12rem; margin-bottom: 30px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; padding: 12px 18px; font-weight: 750; border: 1px solid var(--line); transition: transform .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .btn.primary { color: #061711; background: var(--accent); border-color: var(--accent); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 38px; color: var(--muted); font-size: .9rem; }
+    .hero-meta span::before { content: "●"; color: var(--accent); font-size: .7rem; margin-right: 9px; }
+    section { padding: 76px 0; border-top: 1px solid var(--line); }
+    .section-head { margin-bottom: 30px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.045em; line-height: 1.1; margin: 8px 0 10px; }
+    .section-head p { color: var(--muted); margin: 0; max-width: 680px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: linear-gradient(145deg, var(--panel), rgba(18,26,46,.62)); border: 1px solid var(--line); border-radius: 18px; padding: 23px; }
+    .card .num { color: var(--accent); font-size: .8rem; letter-spacing: .1em; font-weight: 800; }
+    .card h3 { margin: 10px 0 8px; font-size: 1.15rem; letter-spacing: -.02em; }
+    .card p { color: var(--muted); margin: 0; font-size: .95rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+    .tag { padding: 5px 9px; border-radius: 8px; color: #c9d7f5; background: rgba(122,168,255,.1); border: 1px solid rgba(122,168,255,.18); font-size: .78rem; }
+    .two-col { display: grid; grid-template-columns: .85fr 1.15fr; gap: 30px; align-items: start; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { border: 1px solid var(--line); background: var(--panel); border-radius: 11px; padding: 10px 13px; }
+    .timeline { display: grid; gap: 16px; }
+    .timeline-item { padding: 0 0 20px 22px; border-left: 2px solid rgba(85,230,193,.45); position: relative; }
+    .timeline-item::before { content: ""; position: absolute; width: 9px; height: 9px; left: -6px; top: 7px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { color: var(--accent); font-size: .82rem; font-weight: 800; }
+    .timeline-item h3 { margin: 3px 0; font-size: 1.08rem; }
+    .timeline-item .place { color: var(--muted); font-size: .9rem; }
+    .timeline-item p { color: var(--muted); margin: 8px 0 0; }
+    .education { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .education .card { min-height: 165px; }
+    .contact-box { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 30px; border-radius: 22px; border: 1px solid rgba(85,230,193,.28); background: linear-gradient(120deg, rgba(85,230,193,.09), rgba(122,168,255,.07)); }
+    .contact-box h2 { margin: 0 0 8px; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; }
+    .contact-box p { color: var(--muted); margin: 0; }
+    footer { padding: 26px 0; color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 800px) {
+      .grid, .education { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .hero { padding-top: 72px; }
+      .contact-box { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      nav { padding: 14px 0; align-items: flex-start; flex-direction: column; gap: 10px; }
+      .navlinks { gap: 14px; font-size: .85rem; }
+      .grid, .education { grid-template-columns: 1fr; }
+      .hero { padding: 62px 0; }
+      section { padding: 58px 0; }
+      .card { padding: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="wrap" aria-label="Navigation principale">
+      <a class="brand" href="#accueil">Ibrahima<span>.</span></a>
+      <div class="navlinks">
+        <a href="#profil">Profil</a>
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil" style="border-top:0">
+      <div class="wrap">
+        <div class="eyebrow">Portfolio · Informatique & DevOps</div>
+        <h1>Bonjour, moi c’est<br><span>Ibrahima Insa Diop.</span></h1>
+        <p>
+          Étudiant en DSP DevOps au CNAM, je développe mes compétences en programmation,
+          systèmes Linux et réseaux. J’aime concevoir des projets concrets, apprendre de
+          nouvelles technologies et résoudre des problèmes techniques.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#projets">Découvrir mes projets ↘</a>
+          <a class="btn" href="#contact">Me contacter</a>
+        </div>
+        <div class="hero-meta">
+          <span>Meaux, France</span>
+          <span>Recherche de stage du 1er mars au 23 avril 2027</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="profil">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">01 / À propos</div>
+          <h2>Un profil curieux, orienté pratique.</h2>
+          <p>Mon parcours associe apprentissage informatique, projets personnels et expériences professionnelles au contact du public et en équipe.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="num">01</div><h3>Programmation</h3>
+            <p>Développement de petits jeux en Python avec Pygame et création d’un jeu Space Invaders avec Processing.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div><h3>Systèmes & réseaux</h3>
+            <p>Pratique des commandes Linux pour gérer les dossiers et configuration de réseaux dans Cisco Packet Tracer.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div><h3>Travail en équipe</h3>
+            <p>Expériences en équipe dans des environnements dynamiques, avec attention portée à l’organisation, au service et à la sécurité.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="competences">
+      <div class="wrap two-col">
+        <div class="section-head">
+          <div class="eyebrow">02 / Compétences</div>
+          <h2>Mes outils et technologies</h2>
+          <p>Les technologies et environnements que j’ai abordés dans ma formation et mes projets.</p>
+        </div>
+        <div>
+          <div class="skill-list">
+            <span class="skill">Python</span><span class="skill">Pygame</span>
+            <span class="skill">Linux</span><span class="skill">Cisco Packet Tracer</span>
+            <span class="skill">Processing</span><span class="skill">HTML</span>
+            <span class="skill">XHTML</span><span class="skill">Gestion de données (bases)</span>
+          </div>
+          <div style="height:24px"></div>
+          <div class="section-head" style="margin-bottom:14px">
+            <h2 style="font-size:1.3rem">Langues & qualités</h2>
+          </div>
+          <div class="skill-list">
+            <span class="skill">Français</span><span class="skill">Anglais</span>
+            <span class="skill">Autonomie</span><span class="skill">Sociabilité</span>
+            <span class="skill">Gestion du stress</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projets">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">03 / Réalisations</div>
+          <h2>Quelques projets</h2>
+          <p>Des projets de programmation qui m’ont permis de travailler la logique, les règles de jeu, l’affichage et les interactions.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="num">PROJET · GROUPE</div>
+            <h3>Jeu de la vie de Conway</h3>
+            <p>Recréation d’un automate cellulaire sur une grille, avec application des règles de naissance et de survie et affichage de l’évolution des cellules en temps réel.</p>
+            <div class="tags"><span class="tag">Programmation</span><span class="tag">Grille</span><span class="tag">Simulation</span></div>
+          </article>
+          <article class="card">
+            <div class="num">PROJET · SOLO</div>
+            <h3>Space Invaders</h3>
+            <p>Création d’un jeu où le joueur pilote un vaisseau, tire sur des ennemis et esquive des obstacles. Le projet comprend notamment la gestion des collisions et des projectiles.</p>
+            <div class="tags"><span class="tag">Processing</span><span class="tag">Jeu vidéo</span><span class="tag">Collisions</span></div>
+          </article>
+          <article class="card">
+            <div class="num">PROJET PERSONNEL</div>
+            <h3>Jeu de cartes Tarot JOJO</h3>
+            <p>Jeu de cartes inspiré de JoJo’s Bizarre Adventure, développé en Python : pioche de cartes, personnages et pouvoirs, puis combats avec des caractéristiques propres à chaque carte.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Logique de jeu</span><span class="tag">Données</span></div>
+          </article>
+        </div>
+        <p style="color:var(--muted);font-size:.88rem;margin-top:16px">Les projets sont présentés à partir des descriptions de mon CV. Des captures d’écran ou des liens vers le code pourront être ajoutés ultérieurement.</p>
+      </div>
+    </section>
+
+    <section id="parcours">
+      <div class="wrap two-col">
+        <div>
+          <div class="section-head">
+            <div class="eyebrow">04 / Expérience</div>
+            <h2>Mon parcours professionnel</h2>
+            <p>Des expériences qui m’ont appris à travailler en équipe, à m’adapter et à communiquer avec des publics variés.</p>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="date">Juin – août 2026</div>
+              <h3>Agent de production</h3>
+              <div class="place">Magic Rmabo (Elis) · Meaux</div>
+              <p>Manutention, réception et contrôle du linge, tri du linge sale et participation aux opérations de nettoyage. Travail en équipe de six personnes, avec répartition des tâches en binôme, dans le respect des règles d’hygiène et de sécurité.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="date">Juillet – août 2025</div>
+              <h3>Hôte d’accueil</h3>
+              <div class="place">RATP · Paris</div>
+              <p>Accueil et orientation des voyageurs, vente mobile de titres de transport, rechargement de pass et conseils sur les itinéraires.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="date">Juillet – août 2024</div>
+              <h3>Hôte d’accueil — Jeux Olympiques de Paris</h3>
+              <div class="place">RATP · Station Opéra, Paris</div>
+              <p>Orientation de nombreux voyageurs internationaux, communication majoritairement en anglais et coordination au sein d’une équipe de quatre personnes pour fluidifier les déplacements.</p>
+            </article>
+          </div>
+        </div>
+        <div>
+          <div class="section-head">
+            <div class="eyebrow">Formation</div>
+            <h2>Mes études</h2>
+          </div>
+          <div class="education" style="grid-template-columns:1fr">
+            <article class="card">
+              <div class="num">DEPUIS SEPT. 2026</div>
+              <h3>DSP DevOps</h3>
+              <p>CNAM — Conservatoire national des arts et métiers</p>
+            </article>
+            <article class="card">
+              <div class="num">2023 – 2025</div>
+              <h3>Licence L1 informatique / MIPSI</h3>
+              <p>Université du Havre</p>
+            </article>
+            <article class="card">
+              <div class="num">2023</div>
+              <h3>Baccalauréat général</h3>
+              <p>Lycée Henri Moissan, Meaux. Spécialités : numérique et sciences informatiques, anglais monde contemporain et mathématiques.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <div>
+            <div class="eyebrow">05 / Contact</div>
+            <h2>Parlons de votre projet ou d’un stage.</h2>
+            <p>Disponible pour échanger au sujet d’opportunités en informatique, systèmes, réseaux et DevOps.</p>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="mailto:ibrahima.insa@gmail.com">M’envoyer un e-mail ↗</a>
+            <a class="btn" href="tel:+33663924143">06 63 92 41 43</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year">2026</span> Ibrahima Insa Diop</span>
+      <span>Portfolio personnel · Informatique & DevOps</span>
+    </div>
+  </footer>
+</body>
+</html>
